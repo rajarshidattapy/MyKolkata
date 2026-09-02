@@ -1,0 +1,127 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model News {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  image       String?
+  link        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([createdAt(sort: Desc)])
+  @@map("news")
+}
+
+model MarketplaceItem {
+  id        String   @id @default(cuid())
+  title     String
+  location  String?
+  price     String?
+  image     String?
+  link      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([createdAt(sort: Desc)])
+  @@map("marketplace_items")
+}
+
+model Place {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  image       String?
+  location    String?
+  type        String?
+  rating      Float?
+  status      String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([createdAt(sort: Desc)])
+  @@map("places")
+}
+
+model Pandal {
+  id          String   @id @default(cuid())
+  name        String
+  location    String?
+  description String?
+  image       String?
+  distance    String?
+  rating      Float?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([createdAt(sort: Desc)])
+  @@map("pandals")
+}
+
+model Region {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  image       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([createdAt(sort: Desc)])
+  @@map("regions")
+}
+
+model Transport {
+  id        String   @id @default(cuid())
+  category  String
+  name      String?
+  location  String?
+  distance  String?
+  time      String?
+  platform  String?
+  routes    String[] @default([])
+  from      String?
+  to        String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([category])
+  @@index([createdAt(sort: Desc)])
+  @@map("transport")
+}
+
+model Community {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  link        String?
+  icon        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([createdAt(sort: Desc)])
+  @@map("communities")
+}
+
+model TinderProfile {
+  id           String   @id @default(cuid())
+  name         String
+  age          String?
+  bio          String?
+  image        String?
+  baseStars    Float    @default(3)
+  averageStars Float?
+  feedbacks    Json     @default("[]")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([createdAt(sort: Desc)])
+  @@map("tinder_profiles")
+}
