@@ -32,17 +32,29 @@ function Pujo() {
       {/* Region Cards */}
       <div className="flex gap-4 overflow-x-auto hide-scrollbar pb-4 mb-6">
         {regions.map(region => (
-          <div key={region._id} className="card flex-shrink-0 w-64 overflow-hidden">
+          <div
+            key={region._id}
+            className="bg-white dark:bg-gray-700 rounded-lg shadow-md flex-shrink-0 w-64 overflow-hidden flex flex-col"
+          >
+            {/* The image is a flush header rather than a padded child, so it
+                fills the card's full width and clips to its rounded corners.
+                A fixed aspect ratio keeps every card level regardless of the
+                source image's dimensions. */}
             <img
               src={region.image}
               alt={region.name}
-              className="w-full h-32 object-cover -mx-4 -mt-4 mb-3"
+              loading="lazy"
+              className="w-full aspect-[16/10] object-cover object-center bg-gray-100 dark:bg-gray-600"
             />
-            <h2 className="font-bold mb-1">{region.name}</h2>
-            <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">{region.description}</p>
-            <button className="text-orange-600 text-sm font-semibold">
-              Explore {region.name} →
-            </button>
+            <div className="p-4 flex flex-col flex-1">
+              <h2 className="font-bold mb-1">{region.name}</h2>
+              <p className="text-sm text-gray-600 dark:text-gray-300 mb-3 flex-1">
+                {region.description}
+              </p>
+              <button className="text-orange-600 text-sm font-semibold text-left">
+                Explore {region.name} →
+              </button>
+            </div>
           </div>
         ))}
       </div>
