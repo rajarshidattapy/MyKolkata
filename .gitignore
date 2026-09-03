@@ -10,4 +10,4 @@ venv/
 dist/
 .next/
 .env.backend
-data/
+docs/
